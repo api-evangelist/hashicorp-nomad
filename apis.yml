@@ -1,11 +1,20 @@
 aid: hashicorp-nomad
 name: HashiCorp Nomad
 description: >-
-  HashiCorp Nomad is a flexible workload orchestrator that deploys and manages containers, non-containerized applications, and batch jobs.
+  HashiCorp Nomad is a flexible workload orchestrator that enables organizations
+  to deploy and manage containers, non-containerized applications, and batch
+  jobs across on-premises and cloud environments. It provides a single unified
+  workflow for scheduling diverse workloads with high availability and
+  multi-region federation.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Containers
+  - Orchestration
+  - Scheduling
+  - HashiCorp
+  - Workloads
+  - Multi-Cloud
 url: >-
   https://raw.githubusercontent.com/api-evangelist/hashicorp-nomad/refs/heads/main/apis.yml
 created: '2026-03-26'
@@ -15,14 +24,41 @@ apis:
   - aid: hashicorp-nomad:hashicorp-nomad
     name: HashiCorp Nomad
     description: >-
-      HashiCorp Nomad is a flexible workload orchestrator that deploys and manages containers, non-containerized applications, and batch jobs.
-    humanURL: https://github.com/api-evangelist/hashicorp-nomad
+      HashiCorp Nomad is a flexible workload orchestrator that deploys and
+      manages containers, legacy applications, microservices, and batch jobs.
+      It supports Docker, Java, VMs, and executables with a single binary
+      architecture that provides high availability, multi-datacenter
+      federation, and a simple operator experience.
+    humanURL: https://www.nomadproject.io/
     tags:
       - Containers
-    properties: []
+      - Orchestration
+      - Scheduling
+      - HashiCorp
+      - Workloads
+      - Multi-Cloud
+    properties:
+      - type: Documentation
+        url: https://developer.hashicorp.com/nomad/docs
+      - type: Getting Started
+        url: https://developer.hashicorp.com/nomad/tutorials/get-started
 common:
   - type: Website
-    url: https://github.com/api-evangelist/hashicorp-nomad
+    url: https://www.nomadproject.io/
+  - type: Documentation
+    url: https://developer.hashicorp.com/nomad/docs
+  - type: GitHub Organization
+    url: https://github.com/hashicorp
+  - type: GitHub Repository
+    url: https://github.com/hashicorp/nomad
+  - type: Blog
+    url: https://www.hashicorp.com/blog/products/nomad
+  - type: Pricing
+    url: https://www.hashicorp.com/products/nomad/pricing
+  - type: Sign Up
+    url: https://portal.cloud.hashicorp.com/sign-up
+  - type: Tutorials
+    url: https://developer.hashicorp.com/nomad/tutorials
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
