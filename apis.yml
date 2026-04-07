@@ -10,11 +10,11 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Containers
+  - HashiCorp
+  - Multi-Cloud
   - Orchestration
   - Scheduling
-  - HashiCorp
   - Workloads
-  - Multi-Cloud
 url: >-
   https://raw.githubusercontent.com/api-evangelist/hashicorp-nomad/refs/heads/main/apis.yml
 created: '2026-03-26'
@@ -32,11 +32,11 @@ apis:
     humanURL: https://www.nomadproject.io/
     tags:
       - Containers
+      - HashiCorp
+      - Multi-Cloud
       - Orchestration
       - Scheduling
-      - HashiCorp
       - Workloads
-      - Multi-Cloud
     properties:
       - type: Documentation
         url: https://developer.hashicorp.com/nomad/docs
