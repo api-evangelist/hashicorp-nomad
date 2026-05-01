@@ -18,7 +18,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/hashicorp-nomad/refs/heads/main/apis.yml
 created: '2026-03-26'
-modified: '2026-03-26'
+modified: '2026-04-28'
 specificationVersion: '0.19'
 apis:
   - aid: hashicorp-nomad:hashicorp-nomad
@@ -40,6 +40,13 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.hashicorp.com/nomad/docs
+      - type: API Documentation
+        url: https://developer.hashicorp.com/nomad/api-docs
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/hashicorp-nomad/refs/heads/main/openapi/hashicorp-nomad-openapi.yml
+      - type: Authentication
+        url: https://developer.hashicorp.com/nomad/api-docs#authentication
       - type: Getting Started
         url: https://developer.hashicorp.com/nomad/tutorials/get-started
 common:

@@ -1,0 +1,425 @@
+openapi: 3.1.0
+info:
+  title: HashiCorp Nomad HTTP API
+  description: >-
+    The Nomad HTTP API provides full programmatic access to a Nomad cluster.
+    All routes use the /v1/ prefix. Endpoints support managing jobs, nodes,
+    allocations, deployments, and evaluations across on-premises and cloud
+    environments. Authentication uses an ACL token via the X-Nomad-Token
+    header or Bearer authorization.
+  version: '1.8'
+  contact:
+    name: HashiCorp
+    url: https://www.nomadproject.io/
+  license:
+    name: Business Source License 1.1
+    url: https://github.com/hashicorp/nomad/blob/main/LICENSE
+servers:
+  - url: http://127.0.0.1:4646/v1
+    description: Local Nomad agent
+  - url: https://{nomad_host}:{port}/v1
+    description: Custom Nomad cluster
+    variables:
+      nomad_host:
+        default: '127.0.0.1'
+      port:
+        default: '4646'
+security:
+  - NomadToken: []
+  - BearerAuth: []
+tags:
+  - name: Jobs
+    description: Manage Nomad jobs and their lifecycle.
+  - name: Nodes
+    description: Manage and query client nodes in the cluster.
+  - name: Allocations
+    description: Inspect task-to-node allocations.
+  - name: Deployments
+    description: Track rolling updates and deployment history.
+  - name: Evaluations
+    description: Inspect scheduling processes.
+  - name: Namespaces
+    description: Manage namespace segmentation for jobs and resources.
+  - name: ACL
+    description: Manage access control tokens and policies.
+  - name: System
+    description: System-level cluster operations.
+paths:
+  /jobs:
+    get:
+      tags: [Jobs]
+      summary: List jobs
+      description: Lists all known jobs in the system registered with Nomad.
+      parameters:
+        - $ref: '#/components/parameters/Namespace'
+        - $ref: '#/components/parameters/Filter'
+      responses:
+        '200':
+          description: List of jobs.
+    post:
+      tags: [Jobs]
+      summary: Create or register job
+      description: Creates or registers a new job.
+      responses:
+        '200':
+          description: Job registration response.
+  /jobs/parse:
+    post:
+      tags: [Jobs]
+      summary: Parse HCL jobspec
+      description: Converts HCL jobspec to JSON format.
+      responses:
+        '200':
+          description: JSON jobspec.
+  /job/{job_id}:
+    parameters:
+      - $ref: '#/components/parameters/JobId'
+    get:
+      tags: [Jobs]
+      summary: Read job
+      description: Retrieves specification and status for a single job.
+      responses:
+        '200':
+          description: Job specification and status.
+    post:
+      tags: [Jobs]
+      summary: Update job
+      description: Updates an existing job.
+      responses:
+        '200':
+          description: Job update response.
+    delete:
+      tags: [Jobs]
+      summary: Deregister job
+      description: Deregisters a job, and stops all allocations part of it.
+      responses:
+        '200':
+          description: Job deregistered.
+  /job/{job_id}/versions:
+    parameters:
+      - $ref: '#/components/parameters/JobId'
+    get:
+      tags: [Jobs]
+      summary: List job versions
+      description: Reads information about all job versions.
+      responses:
+        '200':
+          description: Job versions.
+  /job/{job_id}/summary:
+    parameters:
+      - $ref: '#/components/parameters/JobId'
+    get:
+      tags: [Jobs]
+      summary: Read job summary
+      description: Obtains summary information about a job.
+      responses:
+        '200':
+          description: Job summary.
+  /job/{job_id}/evaluate:
+    parameters:
+      - $ref: '#/components/parameters/JobId'
+    post:
+      tags: [Jobs]
+      summary: Force evaluation
+      description: Forces scheduler to run for the given job.
+      responses:
+        '200':
+          description: Evaluation forced.
+  /job/{job_id}/plan:
+    parameters:
+      - $ref: '#/components/parameters/JobId'
+    post:
+      tags: [Jobs]
+      summary: Plan job
+      description: Executes a dry-run of the scheduler.
+      responses:
+        '200':
+          description: Plan results.
+  /job/{job_id}/allocations:
+    parameters:
+      - $ref: '#/components/parameters/JobId'
+    get:
+      tags: [Jobs, Allocations]
+      summary: List job allocations
+      description: Reads allocation information for a job.
+      responses:
+        '200':
+          description: Job allocations.
+  /job/{job_id}/deployments:
+    parameters:
+      - $ref: '#/components/parameters/JobId'
+    get:
+      tags: [Jobs, Deployments]
+      summary: List job deployments
+      description: Lists a job's deployment history.
+      responses:
+        '200':
+          description: Deployment history.
+  /job/{job_id}/deployment:
+    parameters:
+      - $ref: '#/components/parameters/JobId'
+    get:
+      tags: [Jobs, Deployments]
+      summary: Read most recent deployment
+      description: Retrieves the most recent deployment.
+      responses:
+        '200':
+          description: Most recent deployment.
+  /job/{job_id}/scale:
+    parameters:
+      - $ref: '#/components/parameters/JobId'
+    get:
+      tags: [Jobs]
+      summary: Read scale status
+      description: Reads scaling status information.
+      responses:
+        '200':
+          description: Scaling status.
+    post:
+      tags: [Jobs]
+      summary: Scale task group
+      description: Modifies task group counts.
+      responses:
+        '200':
+          description: Task group scaled.
+  /job/{job_id}/actions:
+    parameters:
+      - $ref: '#/components/parameters/JobId'
+    get:
+      tags: [Jobs]
+      summary: List task actions
+      description: Lists available task actions.
+      responses:
+        '200':
+          description: Available actions.
+  /nodes:
+    get:
+      tags: [Nodes]
+      summary: List nodes
+      description: Retrieves all registered nodes with optional filtering.
+      parameters:
+        - $ref: '#/components/parameters/Filter'
+      responses:
+        '200':
+          description: List of nodes.
+  /node/{node_id}:
+    parameters:
+      - $ref: '#/components/parameters/NodeId'
+    get:
+      tags: [Nodes]
+      summary: Read node
+      description: Queries the status of a client node.
+      responses:
+        '200':
+          description: Node status.
+  /node/{node_id}/allocations:
+    parameters:
+      - $ref: '#/components/parameters/NodeId'
+    get:
+      tags: [Nodes, Allocations]
+      summary: List node allocations
+      description: Returns allocations scheduled on a specific node.
+      responses:
+        '200':
+          description: Node allocations.
+  /node/{node_id}/evaluate:
+    parameters:
+      - $ref: '#/components/parameters/NodeId'
+    post:
+      tags: [Nodes]
+      summary: Create node evaluation
+      description: Forces a scheduling logic run for the given node.
+      responses:
+        '200':
+          description: Evaluation created.
+  /node/{node_id}/drain:
+    parameters:
+      - $ref: '#/components/parameters/NodeId'
+    post:
+      tags: [Nodes]
+      summary: Toggle node drain
+      description: Toggles the drain mode of the node.
+      responses:
+        '200':
+          description: Drain toggled.
+  /node/{node_id}/purge:
+    parameters:
+      - $ref: '#/components/parameters/NodeId'
+    post:
+      tags: [Nodes]
+      summary: Purge node
+      description: Removes a node from the system.
+      responses:
+        '200':
+          description: Node purged.
+  /node/{node_id}/eligibility:
+    parameters:
+      - $ref: '#/components/parameters/NodeId'
+    post:
+      tags: [Nodes]
+      summary: Toggle node eligibility
+      description: Changes scheduling eligibility status to eligible or ineligible.
+      responses:
+        '200':
+          description: Eligibility toggled.
+  /allocations:
+    get:
+      tags: [Allocations]
+      summary: List allocations
+      responses:
+        '200':
+          description: List of allocations.
+  /allocation/{alloc_id}:
+    parameters:
+      - name: alloc_id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Allocations]
+      summary: Read allocation
+      responses:
+        '200':
+          description: Allocation details.
+  /deployments:
+    get:
+      tags: [Deployments]
+      summary: List deployments
+      responses:
+        '200':
+          description: List of deployments.
+  /deployment/{deployment_id}:
+    parameters:
+      - name: deployment_id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Deployments]
+      summary: Read deployment
+      responses:
+        '200':
+          description: Deployment details.
+  /evaluations:
+    get:
+      tags: [Evaluations]
+      summary: List evaluations
+      responses:
+        '200':
+          description: List of evaluations.
+  /evaluation/{eval_id}:
+    parameters:
+      - name: eval_id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Evaluations]
+      summary: Read evaluation
+      responses:
+        '200':
+          description: Evaluation details.
+  /namespaces:
+    get:
+      tags: [Namespaces]
+      summary: List namespaces
+      responses:
+        '200':
+          description: Namespaces.
+  /namespace/{name}:
+    parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Namespaces]
+      summary: Read namespace
+      responses:
+        '200':
+          description: Namespace details.
+    post:
+      tags: [Namespaces]
+      summary: Create or update namespace
+      responses:
+        '200':
+          description: Namespace upserted.
+    delete:
+      tags: [Namespaces]
+      summary: Delete namespace
+      responses:
+        '200':
+          description: Namespace deleted.
+  /acl/tokens:
+    get:
+      tags: [ACL]
+      summary: List ACL tokens
+      responses:
+        '200':
+          description: ACL tokens.
+  /acl/policies:
+    get:
+      tags: [ACL]
+      summary: List ACL policies
+      responses:
+        '200':
+          description: ACL policies.
+  /status/leader:
+    get:
+      tags: [System]
+      summary: Read leader address
+      responses:
+        '200':
+          description: Cluster leader.
+  /status/peers:
+    get:
+      tags: [System]
+      summary: List server peers
+      responses:
+        '200':
+          description: Server peers.
+  /agent/health:
+    get:
+      tags: [System]
+      summary: Agent health
+      responses:
+        '200':
+          description: Agent health status.
+components:
+  parameters:
+    Namespace:
+      name: namespace
+      in: query
+      description: Namespace to filter by.
+      schema:
+        type: string
+    Filter:
+      name: filter
+      in: query
+      description: URL-encoded server-side filter expression.
+      schema:
+        type: string
+    JobId:
+      name: job_id
+      in: path
+      required: true
+      schema:
+        type: string
+    NodeId:
+      name: node_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    NomadToken:
+      type: apiKey
+      in: header
+      name: X-Nomad-Token
+    BearerAuth:
+      type: http
+      scheme: bearer
