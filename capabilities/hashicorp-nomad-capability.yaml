@@ -1,0 +1,1200 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: HashiCorp Nomad HTTP API
+  description: The Nomad HTTP API provides full programmatic access to a Nomad cluster. All routes use the /v1/ prefix. Endpoints
+    support managing jobs, nodes, allocations, deployments, and evaluations across on-premises and cloud environments. Authentication
+    uses an ACL token via the X-Nomad-Token header or Bearer authorization.
+  tags:
+  - Hashicorp
+  - Nomad
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: hashicorp-nomad
+    baseUri: http://127.0.0.1:4646/v1
+    description: HashiCorp Nomad HTTP API HTTP API.
+    authentication:
+      type: apikey
+      in: header
+      name: X-Nomad-Token
+      value: '{{HASHICORP_NOMAD_TOKEN}}'
+    resources:
+    - name: jobs
+      path: /jobs
+      operations:
+      - name: get-jobs
+        method: GET
+        description: List jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-jobs
+        method: POST
+        description: Create or register job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs-parse
+      path: /jobs/parse
+      operations:
+      - name: post-jobs-parse
+        method: POST
+        description: Parse HCL jobspec
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job-id
+      path: /job/{job_id}
+      operations:
+      - name: get-job-job-id
+        method: GET
+        description: Read job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-job-job-id
+        method: POST
+        description: Update job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-job-job-id
+        method: DELETE
+        description: Deregister job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job-id-versions
+      path: /job/{job_id}/versions
+      operations:
+      - name: get-job-job-id-versions
+        method: GET
+        description: List job versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job-id-summary
+      path: /job/{job_id}/summary
+      operations:
+      - name: get-job-job-id-summary
+        method: GET
+        description: Read job summary
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job-id-evaluate
+      path: /job/{job_id}/evaluate
+      operations:
+      - name: post-job-job-id-evaluate
+        method: POST
+        description: Force evaluation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job-id-plan
+      path: /job/{job_id}/plan
+      operations:
+      - name: post-job-job-id-plan
+        method: POST
+        description: Plan job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job-id-allocations
+      path: /job/{job_id}/allocations
+      operations:
+      - name: get-job-job-id-allocations
+        method: GET
+        description: List job allocations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job-id-deployments
+      path: /job/{job_id}/deployments
+      operations:
+      - name: get-job-job-id-deployments
+        method: GET
+        description: List job deployments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job-id-deployment
+      path: /job/{job_id}/deployment
+      operations:
+      - name: get-job-job-id-deployment
+        method: GET
+        description: Read most recent deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job-id-scale
+      path: /job/{job_id}/scale
+      operations:
+      - name: get-job-job-id-scale
+        method: GET
+        description: Read scale status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-job-job-id-scale
+        method: POST
+        description: Scale task group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job-id-actions
+      path: /job/{job_id}/actions
+      operations:
+      - name: get-job-job-id-actions
+        method: GET
+        description: List task actions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: nodes
+      path: /nodes
+      operations:
+      - name: get-nodes
+        method: GET
+        description: List nodes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: node-node-id
+      path: /node/{node_id}
+      operations:
+      - name: get-node-node-id
+        method: GET
+        description: Read node
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: node-node-id-allocations
+      path: /node/{node_id}/allocations
+      operations:
+      - name: get-node-node-id-allocations
+        method: GET
+        description: List node allocations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: node-node-id-evaluate
+      path: /node/{node_id}/evaluate
+      operations:
+      - name: post-node-node-id-evaluate
+        method: POST
+        description: Create node evaluation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: node-node-id-drain
+      path: /node/{node_id}/drain
+      operations:
+      - name: post-node-node-id-drain
+        method: POST
+        description: Toggle node drain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: node-node-id-purge
+      path: /node/{node_id}/purge
+      operations:
+      - name: post-node-node-id-purge
+        method: POST
+        description: Purge node
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: node-node-id-eligibility
+      path: /node/{node_id}/eligibility
+      operations:
+      - name: post-node-node-id-eligibility
+        method: POST
+        description: Toggle node eligibility
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: allocations
+      path: /allocations
+      operations:
+      - name: get-allocations
+        method: GET
+        description: List allocations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: allocation-alloc-id
+      path: /allocation/{alloc_id}
+      operations:
+      - name: get-allocation-alloc-id
+        method: GET
+        description: Read allocation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: deployments
+      path: /deployments
+      operations:
+      - name: get-deployments
+        method: GET
+        description: List deployments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: deployment-deployment-id
+      path: /deployment/{deployment_id}
+      operations:
+      - name: get-deployment-deployment-id
+        method: GET
+        description: Read deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: evaluations
+      path: /evaluations
+      operations:
+      - name: get-evaluations
+        method: GET
+        description: List evaluations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: evaluation-eval-id
+      path: /evaluation/{eval_id}
+      operations:
+      - name: get-evaluation-eval-id
+        method: GET
+        description: Read evaluation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: namespaces
+      path: /namespaces
+      operations:
+      - name: get-namespaces
+        method: GET
+        description: List namespaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: namespace-name
+      path: /namespace/{name}
+      operations:
+      - name: get-namespace-name
+        method: GET
+        description: Read namespace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-namespace-name
+        method: POST
+        description: Create or update namespace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-namespace-name
+        method: DELETE
+        description: Delete namespace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: acl-tokens
+      path: /acl/tokens
+      operations:
+      - name: get-acl-tokens
+        method: GET
+        description: List ACL tokens
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: acl-policies
+      path: /acl/policies
+      operations:
+      - name: get-acl-policies
+        method: GET
+        description: List ACL policies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: status-leader
+      path: /status/leader
+      operations:
+      - name: get-status-leader
+        method: GET
+        description: Read leader address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: status-peers
+      path: /status/peers
+      operations:
+      - name: get-status-peers
+        method: GET
+        description: List server peers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agent-health
+      path: /agent/health
+      operations:
+      - name: get-agent-health
+        method: GET
+        description: Agent health
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: hashicorp-nomad-rest
+    description: REST adapter for HashiCorp Nomad HTTP API.
+    resources:
+    - path: /jobs
+      name: get-jobs
+      operations:
+      - method: GET
+        name: get-jobs
+        description: List jobs
+        call: hashicorp-nomad.get-jobs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /jobs
+      name: post-jobs
+      operations:
+      - method: POST
+        name: post-jobs
+        description: Create or register job
+        call: hashicorp-nomad.post-jobs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /jobs/parse
+      name: post-jobs-parse
+      operations:
+      - method: POST
+        name: post-jobs-parse
+        description: Parse HCL jobspec
+        call: hashicorp-nomad.post-jobs-parse
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /job/{job_id}
+      name: get-job-job-id
+      operations:
+      - method: GET
+        name: get-job-job-id
+        description: Read job
+        call: hashicorp-nomad.get-job-job-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /job/{job_id}
+      name: post-job-job-id
+      operations:
+      - method: POST
+        name: post-job-job-id
+        description: Update job
+        call: hashicorp-nomad.post-job-job-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /job/{job_id}
+      name: delete-job-job-id
+      operations:
+      - method: DELETE
+        name: delete-job-job-id
+        description: Deregister job
+        call: hashicorp-nomad.delete-job-job-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /job/{job_id}/versions
+      name: get-job-job-id-versions
+      operations:
+      - method: GET
+        name: get-job-job-id-versions
+        description: List job versions
+        call: hashicorp-nomad.get-job-job-id-versions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /job/{job_id}/summary
+      name: get-job-job-id-summary
+      operations:
+      - method: GET
+        name: get-job-job-id-summary
+        description: Read job summary
+        call: hashicorp-nomad.get-job-job-id-summary
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /job/{job_id}/evaluate
+      name: post-job-job-id-evaluate
+      operations:
+      - method: POST
+        name: post-job-job-id-evaluate
+        description: Force evaluation
+        call: hashicorp-nomad.post-job-job-id-evaluate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /job/{job_id}/plan
+      name: post-job-job-id-plan
+      operations:
+      - method: POST
+        name: post-job-job-id-plan
+        description: Plan job
+        call: hashicorp-nomad.post-job-job-id-plan
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /job/{job_id}/allocations
+      name: get-job-job-id-allocations
+      operations:
+      - method: GET
+        name: get-job-job-id-allocations
+        description: List job allocations
+        call: hashicorp-nomad.get-job-job-id-allocations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /job/{job_id}/deployments
+      name: get-job-job-id-deployments
+      operations:
+      - method: GET
+        name: get-job-job-id-deployments
+        description: List job deployments
+        call: hashicorp-nomad.get-job-job-id-deployments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /job/{job_id}/deployment
+      name: get-job-job-id-deployment
+      operations:
+      - method: GET
+        name: get-job-job-id-deployment
+        description: Read most recent deployment
+        call: hashicorp-nomad.get-job-job-id-deployment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /job/{job_id}/scale
+      name: get-job-job-id-scale
+      operations:
+      - method: GET
+        name: get-job-job-id-scale
+        description: Read scale status
+        call: hashicorp-nomad.get-job-job-id-scale
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /job/{job_id}/scale
+      name: post-job-job-id-scale
+      operations:
+      - method: POST
+        name: post-job-job-id-scale
+        description: Scale task group
+        call: hashicorp-nomad.post-job-job-id-scale
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /job/{job_id}/actions
+      name: get-job-job-id-actions
+      operations:
+      - method: GET
+        name: get-job-job-id-actions
+        description: List task actions
+        call: hashicorp-nomad.get-job-job-id-actions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /nodes
+      name: get-nodes
+      operations:
+      - method: GET
+        name: get-nodes
+        description: List nodes
+        call: hashicorp-nomad.get-nodes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /node/{node_id}
+      name: get-node-node-id
+      operations:
+      - method: GET
+        name: get-node-node-id
+        description: Read node
+        call: hashicorp-nomad.get-node-node-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /node/{node_id}/allocations
+      name: get-node-node-id-allocations
+      operations:
+      - method: GET
+        name: get-node-node-id-allocations
+        description: List node allocations
+        call: hashicorp-nomad.get-node-node-id-allocations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /node/{node_id}/evaluate
+      name: post-node-node-id-evaluate
+      operations:
+      - method: POST
+        name: post-node-node-id-evaluate
+        description: Create node evaluation
+        call: hashicorp-nomad.post-node-node-id-evaluate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /node/{node_id}/drain
+      name: post-node-node-id-drain
+      operations:
+      - method: POST
+        name: post-node-node-id-drain
+        description: Toggle node drain
+        call: hashicorp-nomad.post-node-node-id-drain
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /node/{node_id}/purge
+      name: post-node-node-id-purge
+      operations:
+      - method: POST
+        name: post-node-node-id-purge
+        description: Purge node
+        call: hashicorp-nomad.post-node-node-id-purge
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /node/{node_id}/eligibility
+      name: post-node-node-id-eligibility
+      operations:
+      - method: POST
+        name: post-node-node-id-eligibility
+        description: Toggle node eligibility
+        call: hashicorp-nomad.post-node-node-id-eligibility
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /allocations
+      name: get-allocations
+      operations:
+      - method: GET
+        name: get-allocations
+        description: List allocations
+        call: hashicorp-nomad.get-allocations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /allocation/{alloc_id}
+      name: get-allocation-alloc-id
+      operations:
+      - method: GET
+        name: get-allocation-alloc-id
+        description: Read allocation
+        call: hashicorp-nomad.get-allocation-alloc-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /deployments
+      name: get-deployments
+      operations:
+      - method: GET
+        name: get-deployments
+        description: List deployments
+        call: hashicorp-nomad.get-deployments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /deployment/{deployment_id}
+      name: get-deployment-deployment-id
+      operations:
+      - method: GET
+        name: get-deployment-deployment-id
+        description: Read deployment
+        call: hashicorp-nomad.get-deployment-deployment-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /evaluations
+      name: get-evaluations
+      operations:
+      - method: GET
+        name: get-evaluations
+        description: List evaluations
+        call: hashicorp-nomad.get-evaluations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /evaluation/{eval_id}
+      name: get-evaluation-eval-id
+      operations:
+      - method: GET
+        name: get-evaluation-eval-id
+        description: Read evaluation
+        call: hashicorp-nomad.get-evaluation-eval-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /namespaces
+      name: get-namespaces
+      operations:
+      - method: GET
+        name: get-namespaces
+        description: List namespaces
+        call: hashicorp-nomad.get-namespaces
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /namespace/{name}
+      name: get-namespace-name
+      operations:
+      - method: GET
+        name: get-namespace-name
+        description: Read namespace
+        call: hashicorp-nomad.get-namespace-name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /namespace/{name}
+      name: post-namespace-name
+      operations:
+      - method: POST
+        name: post-namespace-name
+        description: Create or update namespace
+        call: hashicorp-nomad.post-namespace-name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /namespace/{name}
+      name: delete-namespace-name
+      operations:
+      - method: DELETE
+        name: delete-namespace-name
+        description: Delete namespace
+        call: hashicorp-nomad.delete-namespace-name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /acl/tokens
+      name: get-acl-tokens
+      operations:
+      - method: GET
+        name: get-acl-tokens
+        description: List ACL tokens
+        call: hashicorp-nomad.get-acl-tokens
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /acl/policies
+      name: get-acl-policies
+      operations:
+      - method: GET
+        name: get-acl-policies
+        description: List ACL policies
+        call: hashicorp-nomad.get-acl-policies
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /status/leader
+      name: get-status-leader
+      operations:
+      - method: GET
+        name: get-status-leader
+        description: Read leader address
+        call: hashicorp-nomad.get-status-leader
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /status/peers
+      name: get-status-peers
+      operations:
+      - method: GET
+        name: get-status-peers
+        description: List server peers
+        call: hashicorp-nomad.get-status-peers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /agent/health
+      name: get-agent-health
+      operations:
+      - method: GET
+        name: get-agent-health
+        description: Agent health
+        call: hashicorp-nomad.get-agent-health
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: hashicorp-nomad-mcp
+    transport: http
+    description: MCP adapter for HashiCorp Nomad HTTP API for AI agent use.
+    tools:
+    - name: get-jobs
+      description: List jobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-jobs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-jobs
+      description: Create or register job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad.post-jobs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-jobs-parse
+      description: Parse HCL jobspec
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad.post-jobs-parse
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job-job-id
+      description: Read job
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-job-job-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-job-job-id
+      description: Update job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad.post-job-job-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-job-job-id
+      description: Deregister job
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: hashicorp-nomad.delete-job-job-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job-job-id-versions
+      description: List job versions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-job-job-id-versions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job-job-id-summary
+      description: Read job summary
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-job-job-id-summary
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-job-job-id-evaluate
+      description: Force evaluation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad.post-job-job-id-evaluate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-job-job-id-plan
+      description: Plan job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad.post-job-job-id-plan
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job-job-id-allocations
+      description: List job allocations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-job-job-id-allocations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job-job-id-deployments
+      description: List job deployments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-job-job-id-deployments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job-job-id-deployment
+      description: Read most recent deployment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-job-job-id-deployment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job-job-id-scale
+      description: Read scale status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-job-job-id-scale
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-job-job-id-scale
+      description: Scale task group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad.post-job-job-id-scale
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job-job-id-actions
+      description: List task actions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-job-job-id-actions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-nodes
+      description: List nodes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-nodes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-node-node-id
+      description: Read node
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-node-node-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-node-node-id-allocations
+      description: List node allocations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-node-node-id-allocations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-node-node-id-evaluate
+      description: Create node evaluation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad.post-node-node-id-evaluate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-node-node-id-drain
+      description: Toggle node drain
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad.post-node-node-id-drain
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-node-node-id-purge
+      description: Purge node
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad.post-node-node-id-purge
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-node-node-id-eligibility
+      description: Toggle node eligibility
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad.post-node-node-id-eligibility
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-allocations
+      description: List allocations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-allocations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-allocation-alloc-id
+      description: Read allocation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-allocation-alloc-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-deployments
+      description: List deployments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-deployments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-deployment-deployment-id
+      description: Read deployment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-deployment-deployment-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-evaluations
+      description: List evaluations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-evaluations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-evaluation-eval-id
+      description: Read evaluation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-evaluation-eval-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-namespaces
+      description: List namespaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-namespaces
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-namespace-name
+      description: Read namespace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-namespace-name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-namespace-name
+      description: Create or update namespace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad.post-namespace-name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-namespace-name
+      description: Delete namespace
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: hashicorp-nomad.delete-namespace-name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-acl-tokens
+      description: List ACL tokens
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-acl-tokens
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-acl-policies
+      description: List ACL policies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-acl-policies
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-status-leader
+      description: Read leader address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-status-leader
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-status-peers
+      description: List server peers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-status-peers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-health
+      description: Agent health
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad.get-agent-health
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    HASHICORP_NOMAD_TOKEN: HASHICORP_NOMAD_TOKEN
