@@ -47,22 +47,22 @@ apis:
           https://raw.githubusercontent.com/api-evangelist/hashicorp-nomad/refs/heads/main/openapi/hashicorp-nomad-openapi.yml
       - type: Authentication
         url: https://developer.hashicorp.com/nomad/api-docs#authentication
-      - type: Getting Started
+      - type: GettingStarted
         url: https://developer.hashicorp.com/nomad/tutorials/get-started
 common:
   - type: Website
     url: https://www.nomadproject.io/
   - type: Documentation
     url: https://developer.hashicorp.com/nomad/docs
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/hashicorp
-  - type: GitHub Repository
+  - type: GitHubRepository
     url: https://github.com/hashicorp/nomad
   - type: Blog
     url: https://www.hashicorp.com/blog/products/nomad
   - type: Pricing
     url: https://www.hashicorp.com/products/nomad/pricing
-  - type: Sign Up
+  - type: SignUp
     url: https://portal.cloud.hashicorp.com/sign-up
   - type: Tutorials
     url: https://developer.hashicorp.com/nomad/tutorials
