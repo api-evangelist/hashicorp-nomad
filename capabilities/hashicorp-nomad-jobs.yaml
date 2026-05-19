@@ -1,0 +1,522 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: HashiCorp Nomad HTTP API — Jobs
+  description: 'HashiCorp Nomad HTTP API — Jobs. 16 operations. Lead operation: Read job. Self-contained Naftiko capability
+    covering one Hashicorp Nomad business surface.'
+  tags:
+  - Hashicorp Nomad
+  - Jobs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HASHICORP_NOMAD_API_KEY: HASHICORP_NOMAD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: hashicorp-nomad-jobs
+    baseUri: http://127.0.0.1:4646/v1
+    description: HashiCorp Nomad HTTP API — Jobs business capability. Self-contained, no shared references.
+    resources:
+    - name: job-job_id
+      path: /job/{job_id}
+      operations:
+      - name: get
+        method: GET
+        description: Read job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post
+        method: POST
+        description: Update job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete
+        method: DELETE
+        description: Deregister job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job_id-actions
+      path: /job/{job_id}/actions
+      operations:
+      - name: get
+        method: GET
+        description: List task actions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job_id-allocations
+      path: /job/{job_id}/allocations
+      operations:
+      - name: get
+        method: GET
+        description: List job allocations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job_id-deployment
+      path: /job/{job_id}/deployment
+      operations:
+      - name: get
+        method: GET
+        description: Read most recent deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job_id-deployments
+      path: /job/{job_id}/deployments
+      operations:
+      - name: get
+        method: GET
+        description: List job deployments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job_id-evaluate
+      path: /job/{job_id}/evaluate
+      operations:
+      - name: post
+        method: POST
+        description: Force evaluation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job_id-plan
+      path: /job/{job_id}/plan
+      operations:
+      - name: post
+        method: POST
+        description: Plan job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job_id-scale
+      path: /job/{job_id}/scale
+      operations:
+      - name: get
+        method: GET
+        description: Read scale status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post
+        method: POST
+        description: Scale task group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job_id-summary
+      path: /job/{job_id}/summary
+      operations:
+      - name: get
+        method: GET
+        description: Read job summary
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job_id-versions
+      path: /job/{job_id}/versions
+      operations:
+      - name: get
+        method: GET
+        description: List job versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs
+      path: /jobs
+      operations:
+      - name: get
+        method: GET
+        description: List jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post
+        method: POST
+        description: Create or register job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs-parse
+      path: /jobs/parse
+      operations:
+      - name: post
+        method: POST
+        description: Parse HCL jobspec
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.HASHICORP_NOMAD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: hashicorp-nomad-jobs-rest
+    port: 8080
+    description: REST adapter for HashiCorp Nomad HTTP API — Jobs. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/job/{job-id}
+      name: job-job-id
+      description: REST surface for job-job_id.
+      operations:
+      - method: GET
+        name: get
+        description: Read job
+        call: hashicorp-nomad-jobs.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Update job
+        call: hashicorp-nomad-jobs.post
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Deregister job
+        call: hashicorp-nomad-jobs.delete
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job/{job-id}/actions
+      name: job-job-id-actions
+      description: REST surface for job-job_id-actions.
+      operations:
+      - method: GET
+        name: get
+        description: List task actions
+        call: hashicorp-nomad-jobs.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job/{job-id}/allocations
+      name: job-job-id-allocations
+      description: REST surface for job-job_id-allocations.
+      operations:
+      - method: GET
+        name: get
+        description: List job allocations
+        call: hashicorp-nomad-jobs.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job/{job-id}/deployment
+      name: job-job-id-deployment
+      description: REST surface for job-job_id-deployment.
+      operations:
+      - method: GET
+        name: get
+        description: Read most recent deployment
+        call: hashicorp-nomad-jobs.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job/{job-id}/deployments
+      name: job-job-id-deployments
+      description: REST surface for job-job_id-deployments.
+      operations:
+      - method: GET
+        name: get
+        description: List job deployments
+        call: hashicorp-nomad-jobs.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job/{job-id}/evaluate
+      name: job-job-id-evaluate
+      description: REST surface for job-job_id-evaluate.
+      operations:
+      - method: POST
+        name: post
+        description: Force evaluation
+        call: hashicorp-nomad-jobs.post
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job/{job-id}/plan
+      name: job-job-id-plan
+      description: REST surface for job-job_id-plan.
+      operations:
+      - method: POST
+        name: post
+        description: Plan job
+        call: hashicorp-nomad-jobs.post
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job/{job-id}/scale
+      name: job-job-id-scale
+      description: REST surface for job-job_id-scale.
+      operations:
+      - method: GET
+        name: get
+        description: Read scale status
+        call: hashicorp-nomad-jobs.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Scale task group
+        call: hashicorp-nomad-jobs.post
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job/{job-id}/summary
+      name: job-job-id-summary
+      description: REST surface for job-job_id-summary.
+      operations:
+      - method: GET
+        name: get
+        description: Read job summary
+        call: hashicorp-nomad-jobs.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job/{job-id}/versions
+      name: job-job-id-versions
+      description: REST surface for job-job_id-versions.
+      operations:
+      - method: GET
+        name: get
+        description: List job versions
+        call: hashicorp-nomad-jobs.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs
+      name: jobs
+      description: REST surface for jobs.
+      operations:
+      - method: GET
+        name: get
+        description: List jobs
+        call: hashicorp-nomad-jobs.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Create or register job
+        call: hashicorp-nomad-jobs.post
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/parse
+      name: jobs-parse
+      description: REST surface for jobs-parse.
+      operations:
+      - method: POST
+        name: post
+        description: Parse HCL jobspec
+        call: hashicorp-nomad-jobs.post
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: hashicorp-nomad-jobs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for HashiCorp Nomad HTTP API — Jobs. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: read-job
+      description: Read job
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-jobs.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-job
+      description: Update job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad-jobs.post
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deregister-job
+      description: Deregister job
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: hashicorp-nomad-jobs.delete
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-task-actions
+      description: List task actions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-jobs.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-job-allocations
+      description: List job allocations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-jobs.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: read-most-recent-deployment
+      description: Read most recent deployment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-jobs.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-job-deployments
+      description: List job deployments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-jobs.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: force-evaluation
+      description: Force evaluation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad-jobs.post
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: plan-job
+      description: Plan job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad-jobs.post
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: read-scale-status
+      description: Read scale status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-jobs.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: scale-task-group
+      description: Scale task group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad-jobs.post
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: read-job-summary
+      description: Read job summary
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-jobs.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-job-versions
+      description: List job versions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-jobs.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-jobs
+      description: List jobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-jobs.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-register-job
+      description: Create or register job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad-jobs.post
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: parse-hcl-jobspec
+      description: Parse HCL jobspec
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: hashicorp-nomad-jobs.post
+      outputParameters:
+      - type: object
+        mapping: $.

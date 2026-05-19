@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: HashiCorp Nomad HTTP API — Deployments
+  description: 'HashiCorp Nomad HTTP API — Deployments. 4 operations. Lead operation: Read deployment. Self-contained Naftiko
+    capability covering one Hashicorp Nomad business surface.'
+  tags:
+  - Hashicorp Nomad
+  - Deployments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HASHICORP_NOMAD_API_KEY: HASHICORP_NOMAD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: hashicorp-nomad-deployments
+    baseUri: http://127.0.0.1:4646/v1
+    description: HashiCorp Nomad HTTP API — Deployments business capability. Self-contained, no shared references.
+    resources:
+    - name: deployment-deployment_id
+      path: /deployment/{deployment_id}
+      operations:
+      - name: get
+        method: GET
+        description: Read deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: deployments
+      path: /deployments
+      operations:
+      - name: get
+        method: GET
+        description: List deployments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job_id-deployment
+      path: /job/{job_id}/deployment
+      operations:
+      - name: get
+        method: GET
+        description: Read most recent deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: job-job_id-deployments
+      path: /job/{job_id}/deployments
+      operations:
+      - name: get
+        method: GET
+        description: List job deployments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.HASHICORP_NOMAD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: hashicorp-nomad-deployments-rest
+    port: 8080
+    description: REST adapter for HashiCorp Nomad HTTP API — Deployments. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/deployment/{deployment-id}
+      name: deployment-deployment-id
+      description: REST surface for deployment-deployment_id.
+      operations:
+      - method: GET
+        name: get
+        description: Read deployment
+        call: hashicorp-nomad-deployments.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/deployments
+      name: deployments
+      description: REST surface for deployments.
+      operations:
+      - method: GET
+        name: get
+        description: List deployments
+        call: hashicorp-nomad-deployments.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job/{job-id}/deployment
+      name: job-job-id-deployment
+      description: REST surface for job-job_id-deployment.
+      operations:
+      - method: GET
+        name: get
+        description: Read most recent deployment
+        call: hashicorp-nomad-deployments.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/job/{job-id}/deployments
+      name: job-job-id-deployments
+      description: REST surface for job-job_id-deployments.
+      operations:
+      - method: GET
+        name: get
+        description: List job deployments
+        call: hashicorp-nomad-deployments.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: hashicorp-nomad-deployments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for HashiCorp Nomad HTTP API — Deployments. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: read-deployment
+      description: Read deployment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-deployments.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-deployments
+      description: List deployments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-deployments.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: read-most-recent-deployment
+      description: Read most recent deployment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-deployments.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-job-deployments
+      description: List job deployments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-deployments.get
+      outputParameters:
+      - type: object
+        mapping: $.

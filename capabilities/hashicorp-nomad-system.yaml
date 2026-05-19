@@ -1,0 +1,134 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: HashiCorp Nomad HTTP API — System
+  description: 'HashiCorp Nomad HTTP API — System. 3 operations. Lead operation: Agent health. Self-contained Naftiko capability
+    covering one Hashicorp Nomad business surface.'
+  tags:
+  - Hashicorp Nomad
+  - System
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HASHICORP_NOMAD_API_KEY: HASHICORP_NOMAD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: hashicorp-nomad-system
+    baseUri: http://127.0.0.1:4646/v1
+    description: HashiCorp Nomad HTTP API — System business capability. Self-contained, no shared references.
+    resources:
+    - name: agent-health
+      path: /agent/health
+      operations:
+      - name: get
+        method: GET
+        description: Agent health
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: status-leader
+      path: /status/leader
+      operations:
+      - name: get
+        method: GET
+        description: Read leader address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: status-peers
+      path: /status/peers
+      operations:
+      - name: get
+        method: GET
+        description: List server peers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.HASHICORP_NOMAD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: hashicorp-nomad-system-rest
+    port: 8080
+    description: REST adapter for HashiCorp Nomad HTTP API — System. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/agent/health
+      name: agent-health
+      description: REST surface for agent-health.
+      operations:
+      - method: GET
+        name: get
+        description: Agent health
+        call: hashicorp-nomad-system.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/status/leader
+      name: status-leader
+      description: REST surface for status-leader.
+      operations:
+      - method: GET
+        name: get
+        description: Read leader address
+        call: hashicorp-nomad-system.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/status/peers
+      name: status-peers
+      description: REST surface for status-peers.
+      operations:
+      - method: GET
+        name: get
+        description: List server peers
+        call: hashicorp-nomad-system.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: hashicorp-nomad-system-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for HashiCorp Nomad HTTP API — System. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: agent-health
+      description: Agent health
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-system.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: read-leader-address
+      description: Read leader address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-system.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-server-peers
+      description: List server peers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-system.get
+      outputParameters:
+      - type: object
+        mapping: $.

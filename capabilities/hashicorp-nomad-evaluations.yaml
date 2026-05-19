@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: HashiCorp Nomad HTTP API — Evaluations
+  description: 'HashiCorp Nomad HTTP API — Evaluations. 2 operations. Lead operation: Read evaluation. Self-contained Naftiko
+    capability covering one Hashicorp Nomad business surface.'
+  tags:
+  - Hashicorp Nomad
+  - Evaluations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HASHICORP_NOMAD_API_KEY: HASHICORP_NOMAD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: hashicorp-nomad-evaluations
+    baseUri: http://127.0.0.1:4646/v1
+    description: HashiCorp Nomad HTTP API — Evaluations business capability. Self-contained, no shared references.
+    resources:
+    - name: evaluation-eval_id
+      path: /evaluation/{eval_id}
+      operations:
+      - name: get
+        method: GET
+        description: Read evaluation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: evaluations
+      path: /evaluations
+      operations:
+      - name: get
+        method: GET
+        description: List evaluations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.HASHICORP_NOMAD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: hashicorp-nomad-evaluations-rest
+    port: 8080
+    description: REST adapter for HashiCorp Nomad HTTP API — Evaluations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/evaluation/{eval-id}
+      name: evaluation-eval-id
+      description: REST surface for evaluation-eval_id.
+      operations:
+      - method: GET
+        name: get
+        description: Read evaluation
+        call: hashicorp-nomad-evaluations.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/evaluations
+      name: evaluations
+      description: REST surface for evaluations.
+      operations:
+      - method: GET
+        name: get
+        description: List evaluations
+        call: hashicorp-nomad-evaluations.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: hashicorp-nomad-evaluations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for HashiCorp Nomad HTTP API — Evaluations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: read-evaluation
+      description: Read evaluation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-evaluations.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-evaluations
+      description: List evaluations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hashicorp-nomad-evaluations.get
+      outputParameters:
+      - type: object
+        mapping: $.
