@@ -2,7 +2,11 @@
 
 HashiCorp Nomad is a flexible workload orchestrator that enables organizations to deploy and manage containers, non-containerized applications, and batch jobs across on-premises and cloud environments. It provides a single unified workflow for scheduling diverse workloads with high availability and multi-region federation.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/hashicorp-nomad/refs/heads/main/apis.yml)
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/hashicorp-nomad/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/hashicorp-nomad/refs/heads/main/apis.yml)
+
+## Scope
+
+- **Type:** Index
 
 ## Tags
 
@@ -16,7 +20,7 @@ HashiCorp Nomad is a flexible workload orchestrator that enables organizations t
 ## Timestamps
 
 - **Created:** 2026-03-26
-- **Modified:** 2026-04-28
+- **Modified:** 2026-05-19
 
 ## APIs
 
@@ -24,7 +28,7 @@ HashiCorp Nomad is a flexible workload orchestrator that enables organizations t
 
 HashiCorp Nomad is a flexible workload orchestrator that deploys and manages containers, legacy applications, microservices, and batch jobs. It supports Docker, Java, VMs, and executables with a single binary architecture that provides high availability, multi-datacenter federation, and a simple operator experience.
 
-**Human URL:** [https://www.nomadproject.io/](https://www.nomadproject.io/)
+- **Human URL:** [https://www.nomadproject.io/](https://www.nomadproject.io/)
 
 #### Tags
 
@@ -38,13 +42,16 @@ HashiCorp Nomad is a flexible workload orchestrator that deploys and manages con
 #### Properties
 
 - [Documentation](https://developer.hashicorp.com/nomad/docs)
-- [API Documentation](https://developer.hashicorp.com/nomad/api-docs)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/hashicorp-nomad/refs/heads/main/openapi/hashicorp-nomad-openapi.yml)
+- [A P I  Documentation](https://developer.hashicorp.com/nomad/api-docs)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/hashicorp-nomad/refs/heads/main/openapi/hashicorp-nomad-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
 - [Authentication](https://developer.hashicorp.com/nomad/api-docs#authentication)
 - [Getting Started](https://developer.hashicorp.com/nomad/tutorials/get-started)
+- [Postman Collection](collections/hashicorp-nomad.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/hashicorp-nomad.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ## Common Properties
 
+- [LinkedIn](https://www.linkedin.com/company/hashicorp)
 - [Website](https://www.nomadproject.io/)
 - [Documentation](https://developer.hashicorp.com/nomad/docs)
 - [GitHub Organization](https://github.com/hashicorp)
@@ -57,5 +64,4 @@ HashiCorp Nomad is a flexible workload orchestrator that deploys and manages con
 ## Maintainers
 
 **FN:** Kin Lane
-
 **Email:** kin@apievangelist.com
