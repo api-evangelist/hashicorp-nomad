@@ -5,7 +5,7 @@ description: >-
   non-containerized applications, and batch jobs across on-premises and cloud environments. It provides a single unified
   workflow for scheduling diverse workloads with high availability and multi-region federation.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Containers
   - HashiCorp
