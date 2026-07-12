@@ -45,6 +45,10 @@ apis:
       - type: GettingStarted
         url: https://developer.hashicorp.com/nomad/tutorials/get-started
 common:
+  - type: DomainSecurity
+    url: security/hashicorp-nomad-domain-security.yml
+  - type: Authentication
+    url: authentication/hashicorp-nomad-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/hashicorp
   - type: Website
