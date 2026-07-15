@@ -45,6 +45,8 @@ apis:
       - type: GettingStarted
         url: https://developer.hashicorp.com/nomad/tutorials/get-started
 common:
+  - type: AgenticAccess
+    url: agentic-access/hashicorp-nomad-agentic-access.yml
   - type: DomainSecurity
     url: security/hashicorp-nomad-domain-security.yml
   - type: Authentication
