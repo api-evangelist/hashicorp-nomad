@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  title: HashiCorp Nomad HTTP ACL Allocations API
+  description: The Nomad HTTP API provides full programmatic access to a Nomad cluster. All routes use the /v1/ prefix. Endpoints support managing jobs, nodes, allocations, deployments, and evaluations across on-premises and cloud environments. Authentication uses an ACL token via the X-Nomad-Token header or Bearer authorization.
+  version: '1.8'
+  contact:
+    name: HashiCorp
+    url: https://www.nomadproject.io/
+  license:
+    name: Business Source License 1.1
+    url: https://github.com/hashicorp/nomad/blob/main/LICENSE
+servers:
+- url: http://127.0.0.1:4646/v1
+  description: Local Nomad agent
+- url: https://{nomad_host}:{port}/v1
+  description: Custom Nomad cluster
+  variables:
+    nomad_host:
+      default: 127.0.0.1
+    port:
+      default: '4646'
+security:
+- NomadToken: []
+- BearerAuth: []
+tags:
+- name: Allocations
+  description: Inspect task-to-node allocations.
+paths:
+  /job/{job_id}/allocations:
+    parameters:
+    - $ref: '#/components/parameters/JobId'
+    get:
+      tags:
+      - Allocations
+      summary: List job allocations
+      description: Reads allocation information for a job.
+      responses:
+        '200':
+          description: Job allocations.
+  /node/{node_id}/allocations:
+    parameters:
+    - $ref: '#/components/parameters/NodeId'
+    get:
+      tags:
+      - Allocations
+      summary: List node allocations
+      description: Returns allocations scheduled on a specific node.
+      responses:
+        '200':
+          description: Node allocations.
+  /allocations:
+    get:
+      tags:
+      - Allocations
+      summary: List allocations
+      responses:
+        '200':
+          description: List of allocations.
+  /allocation/{alloc_id}:
+    parameters:
+    - name: alloc_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Allocations
+      summary: Read allocation
+      responses:
+        '200':
+          description: Allocation details.
+components:
+  parameters:
+    JobId:
+      name: job_id
+      in: path
+      required: true
+      schema:
+        type: string
+    NodeId:
+      name: node_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    NomadToken:
+      type: apiKey
+      in: header
+      name: X-Nomad-Token
+    BearerAuth:
+      type: http
+      scheme: bearer

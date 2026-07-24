@@ -1,0 +1,127 @@
+openapi: 3.1.0
+info:
+  title: HashiCorp Nomad HTTP ACL Nodes API
+  description: The Nomad HTTP API provides full programmatic access to a Nomad cluster. All routes use the /v1/ prefix. Endpoints support managing jobs, nodes, allocations, deployments, and evaluations across on-premises and cloud environments. Authentication uses an ACL token via the X-Nomad-Token header or Bearer authorization.
+  version: '1.8'
+  contact:
+    name: HashiCorp
+    url: https://www.nomadproject.io/
+  license:
+    name: Business Source License 1.1
+    url: https://github.com/hashicorp/nomad/blob/main/LICENSE
+servers:
+- url: http://127.0.0.1:4646/v1
+  description: Local Nomad agent
+- url: https://{nomad_host}:{port}/v1
+  description: Custom Nomad cluster
+  variables:
+    nomad_host:
+      default: 127.0.0.1
+    port:
+      default: '4646'
+security:
+- NomadToken: []
+- BearerAuth: []
+tags:
+- name: Nodes
+  description: Manage and query client nodes in the cluster.
+paths:
+  /nodes:
+    get:
+      tags:
+      - Nodes
+      summary: List nodes
+      description: Retrieves all registered nodes with optional filtering.
+      parameters:
+      - $ref: '#/components/parameters/Filter'
+      responses:
+        '200':
+          description: List of nodes.
+  /node/{node_id}:
+    parameters:
+    - $ref: '#/components/parameters/NodeId'
+    get:
+      tags:
+      - Nodes
+      summary: Read node
+      description: Queries the status of a client node.
+      responses:
+        '200':
+          description: Node status.
+  /node/{node_id}/allocations:
+    parameters:
+    - $ref: '#/components/parameters/NodeId'
+    get:
+      tags:
+      - Nodes
+      summary: List node allocations
+      description: Returns allocations scheduled on a specific node.
+      responses:
+        '200':
+          description: Node allocations.
+  /node/{node_id}/evaluate:
+    parameters:
+    - $ref: '#/components/parameters/NodeId'
+    post:
+      tags:
+      - Nodes
+      summary: Create node evaluation
+      description: Forces a scheduling logic run for the given node.
+      responses:
+        '200':
+          description: Evaluation created.
+  /node/{node_id}/drain:
+    parameters:
+    - $ref: '#/components/parameters/NodeId'
+    post:
+      tags:
+      - Nodes
+      summary: Toggle node drain
+      description: Toggles the drain mode of the node.
+      responses:
+        '200':
+          description: Drain toggled.
+  /node/{node_id}/purge:
+    parameters:
+    - $ref: '#/components/parameters/NodeId'
+    post:
+      tags:
+      - Nodes
+      summary: Purge node
+      description: Removes a node from the system.
+      responses:
+        '200':
+          description: Node purged.
+  /node/{node_id}/eligibility:
+    parameters:
+    - $ref: '#/components/parameters/NodeId'
+    post:
+      tags:
+      - Nodes
+      summary: Toggle node eligibility
+      description: Changes scheduling eligibility status to eligible or ineligible.
+      responses:
+        '200':
+          description: Eligibility toggled.
+components:
+  parameters:
+    NodeId:
+      name: node_id
+      in: path
+      required: true
+      schema:
+        type: string
+    Filter:
+      name: filter
+      in: query
+      description: URL-encoded server-side filter expression.
+      schema:
+        type: string
+  securitySchemes:
+    NomadToken:
+      type: apiKey
+      in: header
+      name: X-Nomad-Token
+    BearerAuth:
+      type: http
+      scheme: bearer

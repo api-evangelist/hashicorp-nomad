@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: HashiCorp Nomad HTTP ACL Namespaces API
+  description: The Nomad HTTP API provides full programmatic access to a Nomad cluster. All routes use the /v1/ prefix. Endpoints support managing jobs, nodes, allocations, deployments, and evaluations across on-premises and cloud environments. Authentication uses an ACL token via the X-Nomad-Token header or Bearer authorization.
+  version: '1.8'
+  contact:
+    name: HashiCorp
+    url: https://www.nomadproject.io/
+  license:
+    name: Business Source License 1.1
+    url: https://github.com/hashicorp/nomad/blob/main/LICENSE
+servers:
+- url: http://127.0.0.1:4646/v1
+  description: Local Nomad agent
+- url: https://{nomad_host}:{port}/v1
+  description: Custom Nomad cluster
+  variables:
+    nomad_host:
+      default: 127.0.0.1
+    port:
+      default: '4646'
+security:
+- NomadToken: []
+- BearerAuth: []
+tags:
+- name: Namespaces
+  description: Manage namespace segmentation for jobs and resources.
+paths:
+  /namespaces:
+    get:
+      tags:
+      - Namespaces
+      summary: List namespaces
+      responses:
+        '200':
+          description: Namespaces.
+  /namespace/{name}:
+    parameters:
+    - name: name
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Namespaces
+      summary: Read namespace
+      responses:
+        '200':
+          description: Namespace details.
+    post:
+      tags:
+      - Namespaces
+      summary: Create or update namespace
+      responses:
+        '200':
+          description: Namespace upserted.
+    delete:
+      tags:
+      - Namespaces
+      summary: Delete namespace
+      responses:
+        '200':
+          description: Namespace deleted.
+components:
+  securitySchemes:
+    NomadToken:
+      type: apiKey
+      in: header
+      name: X-Nomad-Token
+    BearerAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,219 @@
+openapi: 3.1.0
+info:
+  title: HashiCorp Nomad HTTP ACL Jobs API
+  description: The Nomad HTTP API provides full programmatic access to a Nomad cluster. All routes use the /v1/ prefix. Endpoints support managing jobs, nodes, allocations, deployments, and evaluations across on-premises and cloud environments. Authentication uses an ACL token via the X-Nomad-Token header or Bearer authorization.
+  version: '1.8'
+  contact:
+    name: HashiCorp
+    url: https://www.nomadproject.io/
+  license:
+    name: Business Source License 1.1
+    url: https://github.com/hashicorp/nomad/blob/main/LICENSE
+servers:
+- url: http://127.0.0.1:4646/v1
+  description: Local Nomad agent
+- url: https://{nomad_host}:{port}/v1
+  description: Custom Nomad cluster
+  variables:
+    nomad_host:
+      default: 127.0.0.1
+    port:
+      default: '4646'
+security:
+- NomadToken: []
+- BearerAuth: []
+tags:
+- name: Jobs
+  description: Manage Nomad jobs and their lifecycle.
+paths:
+  /jobs:
+    get:
+      tags:
+      - Jobs
+      summary: List jobs
+      description: Lists all known jobs in the system registered with Nomad.
+      parameters:
+      - $ref: '#/components/parameters/Namespace'
+      - $ref: '#/components/parameters/Filter'
+      responses:
+        '200':
+          description: List of jobs.
+    post:
+      tags:
+      - Jobs
+      summary: Create or register job
+      description: Creates or registers a new job.
+      responses:
+        '200':
+          description: Job registration response.
+  /jobs/parse:
+    post:
+      tags:
+      - Jobs
+      summary: Parse HCL jobspec
+      description: Converts HCL jobspec to JSON format.
+      responses:
+        '200':
+          description: JSON jobspec.
+  /job/{job_id}:
+    parameters:
+    - $ref: '#/components/parameters/JobId'
+    get:
+      tags:
+      - Jobs
+      summary: Read job
+      description: Retrieves specification and status for a single job.
+      responses:
+        '200':
+          description: Job specification and status.
+    post:
+      tags:
+      - Jobs
+      summary: Update job
+      description: Updates an existing job.
+      responses:
+        '200':
+          description: Job update response.
+    delete:
+      tags:
+      - Jobs
+      summary: Deregister job
+      description: Deregisters a job, and stops all allocations part of it.
+      responses:
+        '200':
+          description: Job deregistered.
+  /job/{job_id}/versions:
+    parameters:
+    - $ref: '#/components/parameters/JobId'
+    get:
+      tags:
+      - Jobs
+      summary: List job versions
+      description: Reads information about all job versions.
+      responses:
+        '200':
+          description: Job versions.
+  /job/{job_id}/summary:
+    parameters:
+    - $ref: '#/components/parameters/JobId'
+    get:
+      tags:
+      - Jobs
+      summary: Read job summary
+      description: Obtains summary information about a job.
+      responses:
+        '200':
+          description: Job summary.
+  /job/{job_id}/evaluate:
+    parameters:
+    - $ref: '#/components/parameters/JobId'
+    post:
+      tags:
+      - Jobs
+      summary: Force evaluation
+      description: Forces scheduler to run for the given job.
+      responses:
+        '200':
+          description: Evaluation forced.
+  /job/{job_id}/plan:
+    parameters:
+    - $ref: '#/components/parameters/JobId'
+    post:
+      tags:
+      - Jobs
+      summary: Plan job
+      description: Executes a dry-run of the scheduler.
+      responses:
+        '200':
+          description: Plan results.
+  /job/{job_id}/allocations:
+    parameters:
+    - $ref: '#/components/parameters/JobId'
+    get:
+      tags:
+      - Jobs
+      summary: List job allocations
+      description: Reads allocation information for a job.
+      responses:
+        '200':
+          description: Job allocations.
+  /job/{job_id}/deployments:
+    parameters:
+    - $ref: '#/components/parameters/JobId'
+    get:
+      tags:
+      - Jobs
+      summary: List job deployments
+      description: Lists a job's deployment history.
+      responses:
+        '200':
+          description: Deployment history.
+  /job/{job_id}/deployment:
+    parameters:
+    - $ref: '#/components/parameters/JobId'
+    get:
+      tags:
+      - Jobs
+      summary: Read most recent deployment
+      description: Retrieves the most recent deployment.
+      responses:
+        '200':
+          description: Most recent deployment.
+  /job/{job_id}/scale:
+    parameters:
+    - $ref: '#/components/parameters/JobId'
+    get:
+      tags:
+      - Jobs
+      summary: Read scale status
+      description: Reads scaling status information.
+      responses:
+        '200':
+          description: Scaling status.
+    post:
+      tags:
+      - Jobs
+      summary: Scale task group
+      description: Modifies task group counts.
+      responses:
+        '200':
+          description: Task group scaled.
+  /job/{job_id}/actions:
+    parameters:
+    - $ref: '#/components/parameters/JobId'
+    get:
+      tags:
+      - Jobs
+      summary: List task actions
+      description: Lists available task actions.
+      responses:
+        '200':
+          description: Available actions.
+components:
+  parameters:
+    JobId:
+      name: job_id
+      in: path
+      required: true
+      schema:
+        type: string
+    Namespace:
+      name: namespace
+      in: query
+      description: Namespace to filter by.
+      schema:
+        type: string
+    Filter:
+      name: filter
+      in: query
+      description: URL-encoded server-side filter expression.
+      schema:
+        type: string
+  securitySchemes:
+    NomadToken:
+      type: apiKey
+      in: header
+      name: X-Nomad-Token
+    BearerAuth:
+      type: http
+      scheme: bearer

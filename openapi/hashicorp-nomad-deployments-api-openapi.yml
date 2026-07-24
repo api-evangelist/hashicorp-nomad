@@ -1,0 +1,88 @@
+openapi: 3.1.0
+info:
+  title: HashiCorp Nomad HTTP ACL Deployments API
+  description: The Nomad HTTP API provides full programmatic access to a Nomad cluster. All routes use the /v1/ prefix. Endpoints support managing jobs, nodes, allocations, deployments, and evaluations across on-premises and cloud environments. Authentication uses an ACL token via the X-Nomad-Token header or Bearer authorization.
+  version: '1.8'
+  contact:
+    name: HashiCorp
+    url: https://www.nomadproject.io/
+  license:
+    name: Business Source License 1.1
+    url: https://github.com/hashicorp/nomad/blob/main/LICENSE
+servers:
+- url: http://127.0.0.1:4646/v1
+  description: Local Nomad agent
+- url: https://{nomad_host}:{port}/v1
+  description: Custom Nomad cluster
+  variables:
+    nomad_host:
+      default: 127.0.0.1
+    port:
+      default: '4646'
+security:
+- NomadToken: []
+- BearerAuth: []
+tags:
+- name: Deployments
+  description: Track rolling updates and deployment history.
+paths:
+  /job/{job_id}/deployments:
+    parameters:
+    - $ref: '#/components/parameters/JobId'
+    get:
+      tags:
+      - Deployments
+      summary: List job deployments
+      description: Lists a job's deployment history.
+      responses:
+        '200':
+          description: Deployment history.
+  /job/{job_id}/deployment:
+    parameters:
+    - $ref: '#/components/parameters/JobId'
+    get:
+      tags:
+      - Deployments
+      summary: Read most recent deployment
+      description: Retrieves the most recent deployment.
+      responses:
+        '200':
+          description: Most recent deployment.
+  /deployments:
+    get:
+      tags:
+      - Deployments
+      summary: List deployments
+      responses:
+        '200':
+          description: List of deployments.
+  /deployment/{deployment_id}:
+    parameters:
+    - name: deployment_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Deployments
+      summary: Read deployment
+      responses:
+        '200':
+          description: Deployment details.
+components:
+  parameters:
+    JobId:
+      name: job_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    NomadToken:
+      type: apiKey
+      in: header
+      name: X-Nomad-Token
+    BearerAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,61 @@
+openapi: 3.1.0
+info:
+  title: HashiCorp Nomad HTTP ACL System API
+  description: The Nomad HTTP API provides full programmatic access to a Nomad cluster. All routes use the /v1/ prefix. Endpoints support managing jobs, nodes, allocations, deployments, and evaluations across on-premises and cloud environments. Authentication uses an ACL token via the X-Nomad-Token header or Bearer authorization.
+  version: '1.8'
+  contact:
+    name: HashiCorp
+    url: https://www.nomadproject.io/
+  license:
+    name: Business Source License 1.1
+    url: https://github.com/hashicorp/nomad/blob/main/LICENSE
+servers:
+- url: http://127.0.0.1:4646/v1
+  description: Local Nomad agent
+- url: https://{nomad_host}:{port}/v1
+  description: Custom Nomad cluster
+  variables:
+    nomad_host:
+      default: 127.0.0.1
+    port:
+      default: '4646'
+security:
+- NomadToken: []
+- BearerAuth: []
+tags:
+- name: System
+  description: System-level cluster operations.
+paths:
+  /status/leader:
+    get:
+      tags:
+      - System
+      summary: Read leader address
+      responses:
+        '200':
+          description: Cluster leader.
+  /status/peers:
+    get:
+      tags:
+      - System
+      summary: List server peers
+      responses:
+        '200':
+          description: Server peers.
+  /agent/health:
+    get:
+      tags:
+      - System
+      summary: Agent health
+      responses:
+        '200':
+          description: Agent health status.
+components:
+  securitySchemes:
+    NomadToken:
+      type: apiKey
+      in: header
+      name: X-Nomad-Token
+    BearerAuth:
+      type: http
+      scheme: bearer
