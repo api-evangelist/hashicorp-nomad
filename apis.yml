@@ -5,7 +5,20 @@ description: >-
   non-containerized applications, and batch jobs across on-premises and cloud environments. It provides a single unified
   workflow for scheduling diverse workloads with high availability and multi-region federation.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/hashicorp-nomad.png
 tags:
   - Containers
   - HashiCorp
@@ -18,32 +31,142 @@ created: '2026-03-26'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: hashicorp-nomad:hashicorp-nomad
-    name: HashiCorp Nomad
-    description: >-
-      HashiCorp Nomad is a flexible workload orchestrator that deploys and manages containers, legacy applications,
-      microservices, and batch jobs. It supports Docker, Java, VMs, and executables with a single binary architecture
-      that provides high availability, multi-datacenter federation, and a simple operator experience.
-    humanURL: https://www.nomadproject.io/
-    tags:
-      - Containers
-      - HashiCorp
-      - Multi-Cloud
-      - Orchestration
-      - Scheduling
-      - Workloads
-    properties:
-      - type: Documentation
-        url: https://developer.hashicorp.com/nomad/docs
-      - type: API Documentation
-        url: https://developer.hashicorp.com/nomad/api-docs
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/hashicorp-nomad/refs/heads/main/openapi/hashicorp-nomad-openapi.yml
-      - type: Authentication
-        url: https://developer.hashicorp.com/nomad/api-docs#authentication
-      - type: GettingStarted
-        url: https://developer.hashicorp.com/nomad/tutorials/get-started
+- aid: hashicorp-nomad:hashicorp-nomad-acl-api
+  name: HashiCorp Nomad ACL API
+  description: Manage access control tokens and policies.
+  humanURL: https://www.nomadproject.io/
+  tags:
+  - ACL
+  properties:
+  - type: OpenAPI
+    url: openapi/hashicorp-nomad-acl-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hashicorp.com/nomad/docs
+  - type: API Documentation
+    url: https://developer.hashicorp.com/nomad/api-docs
+  - type: Authentication
+    url: https://developer.hashicorp.com/nomad/api-docs#authentication
+  - type: GettingStarted
+    url: https://developer.hashicorp.com/nomad/tutorials/get-started
+- aid: hashicorp-nomad:hashicorp-nomad-allocations-api
+  name: HashiCorp Nomad Allocations API
+  description: Inspect task-to-node allocations.
+  humanURL: https://www.nomadproject.io/
+  tags:
+  - Allocations
+  properties:
+  - type: OpenAPI
+    url: openapi/hashicorp-nomad-allocations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hashicorp.com/nomad/docs
+  - type: API Documentation
+    url: https://developer.hashicorp.com/nomad/api-docs
+  - type: Authentication
+    url: https://developer.hashicorp.com/nomad/api-docs#authentication
+  - type: GettingStarted
+    url: https://developer.hashicorp.com/nomad/tutorials/get-started
+- aid: hashicorp-nomad:hashicorp-nomad-deployments-api
+  name: HashiCorp Nomad Deployments API
+  description: Track rolling updates and deployment history.
+  humanURL: https://www.nomadproject.io/
+  tags:
+  - Deployments
+  properties:
+  - type: OpenAPI
+    url: openapi/hashicorp-nomad-deployments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hashicorp.com/nomad/docs
+  - type: API Documentation
+    url: https://developer.hashicorp.com/nomad/api-docs
+  - type: Authentication
+    url: https://developer.hashicorp.com/nomad/api-docs#authentication
+  - type: GettingStarted
+    url: https://developer.hashicorp.com/nomad/tutorials/get-started
+- aid: hashicorp-nomad:hashicorp-nomad-evaluations-api
+  name: HashiCorp Nomad Evaluations API
+  description: Inspect scheduling processes.
+  humanURL: https://www.nomadproject.io/
+  tags:
+  - Evaluations
+  properties:
+  - type: OpenAPI
+    url: openapi/hashicorp-nomad-evaluations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hashicorp.com/nomad/docs
+  - type: API Documentation
+    url: https://developer.hashicorp.com/nomad/api-docs
+  - type: Authentication
+    url: https://developer.hashicorp.com/nomad/api-docs#authentication
+  - type: GettingStarted
+    url: https://developer.hashicorp.com/nomad/tutorials/get-started
+- aid: hashicorp-nomad:hashicorp-nomad-jobs-api
+  name: HashiCorp Nomad Jobs API
+  description: Manage Nomad jobs and their lifecycle.
+  humanURL: https://www.nomadproject.io/
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/hashicorp-nomad-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hashicorp.com/nomad/docs
+  - type: API Documentation
+    url: https://developer.hashicorp.com/nomad/api-docs
+  - type: Authentication
+    url: https://developer.hashicorp.com/nomad/api-docs#authentication
+  - type: GettingStarted
+    url: https://developer.hashicorp.com/nomad/tutorials/get-started
+- aid: hashicorp-nomad:hashicorp-nomad-namespaces-api
+  name: HashiCorp Nomad Namespaces API
+  description: Manage namespace segmentation for jobs and resources.
+  humanURL: https://www.nomadproject.io/
+  tags:
+  - Namespaces
+  properties:
+  - type: OpenAPI
+    url: openapi/hashicorp-nomad-namespaces-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hashicorp.com/nomad/docs
+  - type: API Documentation
+    url: https://developer.hashicorp.com/nomad/api-docs
+  - type: Authentication
+    url: https://developer.hashicorp.com/nomad/api-docs#authentication
+  - type: GettingStarted
+    url: https://developer.hashicorp.com/nomad/tutorials/get-started
+- aid: hashicorp-nomad:hashicorp-nomad-nodes-api
+  name: HashiCorp Nomad Nodes API
+  description: Manage and query client nodes in the cluster.
+  humanURL: https://www.nomadproject.io/
+  tags:
+  - Nodes
+  properties:
+  - type: OpenAPI
+    url: openapi/hashicorp-nomad-nodes-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hashicorp.com/nomad/docs
+  - type: API Documentation
+    url: https://developer.hashicorp.com/nomad/api-docs
+  - type: Authentication
+    url: https://developer.hashicorp.com/nomad/api-docs#authentication
+  - type: GettingStarted
+    url: https://developer.hashicorp.com/nomad/tutorials/get-started
+- aid: hashicorp-nomad:hashicorp-nomad-system-api
+  name: HashiCorp Nomad System API
+  description: System-level cluster operations.
+  humanURL: https://www.nomadproject.io/
+  tags:
+  - System
+  properties:
+  - type: OpenAPI
+    url: openapi/hashicorp-nomad-system-api-openapi.yml
+  - type: Documentation
+    url: https://developer.hashicorp.com/nomad/docs
+  - type: API Documentation
+    url: https://developer.hashicorp.com/nomad/api-docs
+  - type: Authentication
+    url: https://developer.hashicorp.com/nomad/api-docs#authentication
+  - type: GettingStarted
+    url: https://developer.hashicorp.com/nomad/tutorials/get-started
 common:
   - type: AgenticAccess
     url: agentic-access/hashicorp-nomad-agentic-access.yml
