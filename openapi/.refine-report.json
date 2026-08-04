@@ -1,0 +1,28 @@
+{
+  "provider": "hashicorp-nomad",
+  "sources": [
+    "hashicorp-nomad-acl-api-openapi.yml",
+    "hashicorp-nomad-allocations-api-openapi.yml",
+    "hashicorp-nomad-deployments-api-openapi.yml",
+    "hashicorp-nomad-evaluations-api-openapi.yml",
+    "hashicorp-nomad-jobs-api-openapi.yml",
+    "hashicorp-nomad-namespaces-api-openapi.yml",
+    "hashicorp-nomad-nodes-api-openapi.yml",
+    "hashicorp-nomad-system-api-openapi.yml"
+  ],
+  "outputs": [
+    "hashicorp-nomad-acl-api-openapi.yml",
+    "hashicorp-nomad-allocations-api-openapi.yml",
+    "hashicorp-nomad-deployments-api-openapi.yml",
+    "hashicorp-nomad-evaluations-api-openapi.yml",
+    "hashicorp-nomad-jobs-api-openapi.yml",
+    "hashicorp-nomad-namespaces-api-openapi.yml",
+    "hashicorp-nomad-nodes-api-openapi.yml",
+    "hashicorp-nomad-system-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
