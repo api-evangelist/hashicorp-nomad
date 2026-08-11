@@ -168,6 +168,12 @@ apis:
   - type: GettingStarted
     url: https://developer.hashicorp.com/nomad/tutorials/get-started
 common:
+  - type: IssueTracker
+    url: https://github.com/hashicorp/nomad/issues
+  - type: Releases
+    url: https://github.com/hashicorp/nomad/releases
+  - type: CodeOfConduct
+    url: https://github.com/hashicorp/nomad/blob/main/.github/CODE_OF_CONDUCT.md
   - type: AgenticAccess
     url: agentic-access/hashicorp-nomad-agentic-access.yml
   - type: DomainSecurity
