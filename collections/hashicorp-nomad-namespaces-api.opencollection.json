@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HashiCorp Nomad HTTP ACL Namespaces API",
+    "version": "1.8"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Nomad-Token",
+      "value": "{{X-Nomad-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Namespaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/namespaces"
+          },
+          "docs": "List namespaces"
+        },
+        {
+          "info": {
+            "name": "Read namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/namespace/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Read namespace"
+        },
+        {
+          "info": {
+            "name": "Create or update namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:4646/v1/namespace/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create or update namespace"
+        },
+        {
+          "info": {
+            "name": "Delete namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:4646/v1/namespace/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete namespace"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

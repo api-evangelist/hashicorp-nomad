@@ -1,0 +1,307 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HashiCorp Nomad HTTP ACL Jobs API",
+    "version": "1.8"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Nomad-Token",
+      "value": "{{X-Nomad-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/jobs",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace to filter by."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "URL-encoded server-side filter expression."
+              }
+            ]
+          },
+          "docs": "Lists all known jobs in the system registered with Nomad."
+        },
+        {
+          "info": {
+            "name": "Create or register job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:4646/v1/jobs"
+          },
+          "docs": "Creates or registers a new job."
+        },
+        {
+          "info": {
+            "name": "Parse HCL jobspec",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:4646/v1/jobs/parse"
+          },
+          "docs": "Converts HCL jobspec to JSON format."
+        },
+        {
+          "info": {
+            "name": "Read job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/job/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specification and status for a single job."
+        },
+        {
+          "info": {
+            "name": "Update job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:4646/v1/job/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates an existing job."
+        },
+        {
+          "info": {
+            "name": "Deregister job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:4646/v1/job/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deregisters a job, and stops all allocations part of it."
+        },
+        {
+          "info": {
+            "name": "List job versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/job/:job_id/versions",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reads information about all job versions."
+        },
+        {
+          "info": {
+            "name": "Read job summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/job/:job_id/summary",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Obtains summary information about a job."
+        },
+        {
+          "info": {
+            "name": "Force evaluation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:4646/v1/job/:job_id/evaluate",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Forces scheduler to run for the given job."
+        },
+        {
+          "info": {
+            "name": "Plan job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:4646/v1/job/:job_id/plan",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Executes a dry-run of the scheduler."
+        },
+        {
+          "info": {
+            "name": "List job allocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/job/:job_id/allocations",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reads allocation information for a job."
+        },
+        {
+          "info": {
+            "name": "List job deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/job/:job_id/deployments",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists a job's deployment history."
+        },
+        {
+          "info": {
+            "name": "Read most recent deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/job/:job_id/deployment",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the most recent deployment."
+        },
+        {
+          "info": {
+            "name": "Read scale status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/job/:job_id/scale",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reads scaling status information."
+        },
+        {
+          "info": {
+            "name": "Scale task group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:4646/v1/job/:job_id/scale",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Modifies task group counts."
+        },
+        {
+          "info": {
+            "name": "List task actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/job/:job_id/actions",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists available task actions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HashiCorp Nomad HTTP ACL Deployments API",
+    "version": "1.8"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Nomad-Token",
+      "value": "{{X-Nomad-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List job deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/job/:job_id/deployments",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists a job's deployment history."
+        },
+        {
+          "info": {
+            "name": "Read most recent deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/job/:job_id/deployment",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the most recent deployment."
+        },
+        {
+          "info": {
+            "name": "List deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/deployments"
+          },
+          "docs": "List deployments"
+        },
+        {
+          "info": {
+            "name": "Read deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/deployment/:deployment_id",
+            "params": [
+              {
+                "name": "deployment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Read deployment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

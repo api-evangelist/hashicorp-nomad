@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HashiCorp Nomad HTTP ACL Nodes API",
+    "version": "1.8"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Nomad-Token",
+      "value": "{{X-Nomad-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Nodes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/nodes",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "URL-encoded server-side filter expression."
+              }
+            ]
+          },
+          "docs": "Retrieves all registered nodes with optional filtering."
+        },
+        {
+          "info": {
+            "name": "Read node",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/node/:node_id",
+            "params": [
+              {
+                "name": "node_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Queries the status of a client node."
+        },
+        {
+          "info": {
+            "name": "List node allocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:4646/v1/node/:node_id/allocations",
+            "params": [
+              {
+                "name": "node_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns allocations scheduled on a specific node."
+        },
+        {
+          "info": {
+            "name": "Create node evaluation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:4646/v1/node/:node_id/evaluate",
+            "params": [
+              {
+                "name": "node_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Forces a scheduling logic run for the given node."
+        },
+        {
+          "info": {
+            "name": "Toggle node drain",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:4646/v1/node/:node_id/drain",
+            "params": [
+              {
+                "name": "node_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Toggles the drain mode of the node."
+        },
+        {
+          "info": {
+            "name": "Purge node",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:4646/v1/node/:node_id/purge",
+            "params": [
+              {
+                "name": "node_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes a node from the system."
+        },
+        {
+          "info": {
+            "name": "Toggle node eligibility",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:4646/v1/node/:node_id/eligibility",
+            "params": [
+              {
+                "name": "node_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Changes scheduling eligibility status to eligible or ineligible."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

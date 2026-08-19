@@ -1,0 +1,183 @@
+{
+  "item": [
+    {
+      "id": "3a24d18b-c6da-41ef-9cf1-fd275ae746bd",
+      "name": "ACL",
+      "description": {
+        "content": "Manage access control tokens and policies.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a0318488-7eef-4a84-a76b-de3cce5d0d3c",
+          "name": "List ACL tokens",
+          "request": {
+            "name": "List ACL tokens",
+            "description": {},
+            "url": {
+              "path": [
+                "acl",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "07ae43ce-0aae-498f-8bbc-19240a981d54",
+              "name": "ACL tokens.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acl",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Nomad-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "953ab843-50d4-41b5-91e4-559ec7418184",
+          "name": "List ACL policies",
+          "request": {
+            "name": "List ACL policies",
+            "description": {},
+            "url": {
+              "path": [
+                "acl",
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "abdabb37-26e0-4cc3-9010-5eb34ce3ab71",
+              "name": "ACL policies.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acl",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Nomad-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://127.0.0.1:4646/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Nomad-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3dfafb3f-b94b-41e0-a3c8-8af683de94b1",
+    "name": "HashiCorp Nomad HTTP ACL API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Nomad HTTP API provides full programmatic access to a Nomad cluster. All routes use the /v1/ prefix. Endpoints support managing jobs, nodes, allocations, deployments, and evaluations across on-premises and cloud environments. Authentication uses an ACL token via the X-Nomad-Token header or Bearer authorization.\n\nContact Support:\n Name: HashiCorp",
+      "type": "text/plain"
+    }
+  }
+}
