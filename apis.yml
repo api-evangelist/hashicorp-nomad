@@ -70,6 +70,8 @@ apis:
   description: Track rolling updates and deployment history.
   humanURL: https://www.nomadproject.io/
   tags:
+  - Deployment
+  tags_raw:
   - Deployments
   properties:
   - type: OpenAPI
@@ -104,6 +106,8 @@ apis:
   description: Manage Nomad jobs and their lifecycle.
   humanURL: https://www.nomadproject.io/
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
