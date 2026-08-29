@@ -5,6 +5,19 @@ description: >-
   non-containerized applications, and batch jobs across on-premises and cloud environments. It provides a single unified
   workflow for scheduling diverse workloads with high availability and multi-region federation.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
